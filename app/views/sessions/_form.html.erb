@@ -1,0 +1,12 @@
+<%= form_for(:session, url: login_path) do |f| %>
+
+  <%= f.label :login_name, "Benutzername" %>
+  <%= f.text_field :login_name, class: "form-first" %>
+
+  <%= f.label :login_password, "Passwort" %>
+  <%= f.password_field :login_password %>
+
+  <div class="form_footer">
+    <%= f.submit "Anmelden", class: "btn_grey" %>
+  </div>
+<% end %>

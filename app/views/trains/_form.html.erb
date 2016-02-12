@@ -1,0 +1,16 @@
+<%= form_for(@train) do |f| %>
+
+  <%= f.label :name, "Zugnummer" %>
+  <%= f.text_field :name, placeholder: "Bitte Zugnummer eingeben!",
+    class: "form-first" %>
+
+  <%= f.label :traintype_id, "Zugtyp" %>
+  <%= f.collection_select :traintype_id, Traintype.all , :id, :name %>
+
+  <div class="form_footer">
+    <button type="button" class="btn_grey" onclick="return location.href='/'">
+      Abbrechen
+    </button>
+    <%= f.submit "Speichern", class: "btn_green" %>
+  </div>
+<% end %>

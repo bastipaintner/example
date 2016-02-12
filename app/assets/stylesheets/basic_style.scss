@@ -1,0 +1,115 @@
+@font-face {
+  font-family: Raleway;
+  src: asset_url('Raleway-Regular.ttf');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Raleway;
+  src: asset_url('Raleway-ExtraBold.ttf');
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: Raleway;
+  src: asset_url('Raleway-Thin.ttf');
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: control_btn;
+  src: asset_url('control_btns.ttf');
+  font-weight: 400;
+}
+
+* {
+  outline: none;
+  box-sizing: border-box;
+}
+html {
+  height: 100%;
+}
+
+body {
+  font-family: 'Raleway', Georgia, sans-serif;
+  font-size: 14px;
+  color: $text_color;
+  @include zero_space;
+  height: 100%;
+  background-color: $page_background;
+}
+
+div {
+  @include zero_space;
+}
+
+.row {
+  @include display_flex(row);
+  > * { margin: 0px; }
+  }
+
+.column { @include display_flex(column); }
+
+.center { @include align(center,center, center); }
+
+.full { @include full; }
+
+input, select {
+  @include border_padding(3px, 4px);
+  border: none;
+  color: inherit;
+  font: inherit;
+}
+
+ul {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+p {
+  margin: 2px;
+  padding: 2px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 4px 2px;
+  padding: 2px;
+}
+
+
+table {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+thead > tr > th {
+  border-bottom: 1px solid $text-color;
+}
+
+tbody > tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.control_font {
+  font-family: 'control_btn';
+}
+
+.faded_out {
+  color: $semi_dark_grey;
+  cursor: not-allowed;
+}
+
+.text_right {
+  text-align: right;
+}
+
+.text_center {
+  text-align: center;
+}

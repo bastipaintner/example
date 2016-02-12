@@ -1,0 +1,12 @@
+<tr>
+  <td><p><%= traintype.name %></p></td>
+  <td class="text_right">
+    <%= if current_page?(traintypes_path)
+      link_to 'Anzeigen', traintype, class: "btn_grey"
+    end %>
+    <%= link_to 'Bearbeiten', edit_traintype_path(traintype),
+      class: "btn_green" %>
+    <%= link_to 'Löschen', traintype, method: :delete, data: { confirm:
+      'Sind Sie sich sicher?' }, class: "btn_red" %>
+  </td>
+</tr>

@@ -1,0 +1,14 @@
+<% provide(:title, @user.name) %>
+<div class="content_center_box">
+  <div class="title_row">
+    <h1>Nutzer: <%= @user.name %></h1>
+  </div>
+  <div class="row">
+    <table>
+      <thead><th>Name</th><th colspan="4">Gruppe</th></thead>
+      <tbody><%= render @user %></tbody>
+    </table>
+    <%= link_to 'Zurück', users_path, class: "btn_grey" %>
+    <%= link_to 'Neuer Nutzer', new_user_path, class: "btn_green" %>
+  </div>
+</div>

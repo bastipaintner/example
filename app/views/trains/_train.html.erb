@@ -1,0 +1,14 @@
+<tr>
+  <td><p><%= train.name %></p></td>
+  <td><p><%= train.traintype.name %></p></td>
+  <td><p><%= train.ip_address %></p></td>
+  <td class="text_right">
+    <%= if current_page?(trains_path) || current_page?(root_path)
+      link_to 'Anzeigen', train, class: "btn_grey"
+    end %>
+    <%= link_to 'Bearbeiten', edit_train_path(train),
+      class: "btn_green" %>
+    <%= link_to 'Löschen', train, method: :delete, data: {
+      confirm: 'Sind Sie sich sicher?' }, class: "btn_red" %>
+  </td>
+</tr>

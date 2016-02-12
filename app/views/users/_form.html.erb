@@ -1,0 +1,24 @@
+<%= form_for(@user) do |f| %>
+
+  <%= f.label :name, "Benutzername" %>
+  <%= f.text_field :name, placeholder: "Bitte Nutzernamen eingeben!",
+    class: "form-first" %>
+
+  <%= f.label :admin, "Nutzerart" %>
+  <%= f.select :admin, [['Leitwarte',0], ['Admin',1]] %>
+
+  <%= f.label :password, "Passwort" %>
+  <%= f.password_field :password %>
+
+  <%= f.label :password_confirmation, "Passwort bestätigen" %>
+  <%= f.password_field :password_confirmation %>
+
+  <div class="form_footer">
+    <button type="button" class="btn_grey"
+      onclick="return location.href='<%= users_path %>'">
+      Abbrechen
+    </button>
+    <%= f.submit current_page?(new_user_path) ? "Erstellen" : "Speichern",
+      class: "btn_green" %>
+  </div>
+<% end %>

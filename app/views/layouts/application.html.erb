@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= page_title yield(:title) %></title>
+  <%= stylesheet_link_tag    'application', media: 'all',
+      'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <%= render 'layouts/shim' %>
+</head>
+<body>
+  <%= render 'layouts/header' if request.fullpath != login_path %>
+  <% if !flash.blank? %>
+  <%= render partial: 'shared/modal', locals: {body: "shared/flash",
+    modal_title: "Fehler"} %>
+  <% end %>
+  <% if request.fullpath != login_path %>
+  <section class="content">
+    <%= yield %>
+  </section>
+  <% else %>
+    <%= yield %>
+  <% end %>
+
+</body>
+</html>

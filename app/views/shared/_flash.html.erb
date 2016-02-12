@@ -1,0 +1,6 @@
+<% @modal_title = "Fehler" %>
+<ul>
+  <% flash.each do |message_type, message| %>
+    <li class="<%= message_type %>"><%= message %></li>
+  <% end %>
+</ul>

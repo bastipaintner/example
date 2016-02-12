@@ -1,0 +1,22 @@
+.footer {
+  width: 100%;
+  min-height: 40px;
+  position: fixed;
+  @include display_flex(row);
+  @include align(space-between, center, center);
+  bottom: 0px;
+  left: 0px;
+  padding: 0px 12px;
+  background-color: $header_background;
+  color: $header_color;
+  font-weight: 800;
+  font-size: 20px;
+  z-index: 100;
+  section {
+    @include display_flex(row);
+    @include align(center, center, center);
+    > * {
+      margin: 4px;
+    }
+  }
+}

@@ -1,0 +1,32 @@
+button, .btn_green, .btn_red, .btn_grey {
+  background-color: $btn_background;
+  padding: 2px;
+  margin: 2px;
+  border-radius: 3px;
+  text-align: center;
+  border: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+table {
+  button, .btn_green, .btn_red, .btn_grey {
+    background-color: transparent;
+  }
+}
+
+.btn_green:hover {
+  background-color: $green;
+  color: $light_grey;
+}
+
+.btn_red:hover {
+  background-color: $red;
+  color: $light_grey;
+}
+
+.btn_grey:hover {
+  background-color: $dark_grey;
+  color: $light_grey;
+}

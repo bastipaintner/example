@@ -1,0 +1,14 @@
+<% provide(:title, "Züge") %>
+<div class="content_center_box">
+  <div class="title_row">
+    <h1>Z&uuml;ge</h1>
+  </div>
+  <div class="row">
+    <table>
+      <thead><th>Name</th><th>Zugart</th><th colspan="4">IP-Adresse</th></thead>
+      <tbody><%= render @trains %></tbody>
+    </table>
+    <%= link_to 'Zurück', administration_path, class: "btn_grey" %>
+    <%= link_to 'Neuer Zug', new_train_path, class: "btn_green" %>
+  </div>
+</div>

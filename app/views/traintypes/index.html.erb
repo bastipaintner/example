@@ -1,0 +1,14 @@
+<% provide(:title, "Zugtypen") %>
+<div class="content_center_box">
+  <div class="title_row">
+    <h1>Zugtypen</h1>
+  </div>
+  <div class="row">
+    <table>
+      <thead><th colspan="4">Name</th></thead>
+      <tbody><%= render @traintypes %></tbody>
+    </table>
+    <%= link_to 'Zurück', administration_path, class: "btn_grey" %>
+    <%= link_to 'Neuer Zugtyp', new_traintype_path, class: "btn_green" %>
+  </div>
+</div>

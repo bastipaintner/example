@@ -1,0 +1,33 @@
+.form_wrapper {
+  @include flex(0 1 400px);
+  h1 {
+    margin: 0px;
+    background-color: $form_background_2;
+    @include border_padding(3px 3px 0px 0px, 4px);
+    text-align: center;
+  }
+}
+
+form {
+  @include display_flex(column);
+  background-color: $form_background_1;
+  @include border_padding(0px 0px 3px 3px, 4px 10px);
+  .form_element {
+    margin: 5px 0px;
+  }
+  .row {
+    justify-content: space-between;
+  }
+  .form_footer {
+    @include display_flex(row);
+    @include align(center, center, center);
+  }
+  input, select, textarea {
+    background-color: $form_background_2;
+    margin-bottom: 5px;
+  }
+  label {
+    font-weight: 800;
+    margin-top: 5px;
+  }
+}

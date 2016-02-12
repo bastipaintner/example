@@ -1,0 +1,81 @@
+.content {
+  margin: 0px;
+  min-height: 100%;
+  top: 0px;
+  left:0px;
+  padding: 24px 4px 4px 4px;
+  @include display_flex(column);
+  > .center {
+    margin-top: 30px;
+  }
+}
+
+.content_center_box {
+  @include display_flex(column);
+  align-self: center;
+  > .row {
+    background-color: $content_background;
+    border-radius: 3px;
+    margin: 4px 0px;
+    padding: 4px;
+    @include align(space-between, center, center);
+    min-width: 700px;
+    > * {
+      @include flex(1 1 33%);
+    }
+  }
+  .title_row {
+    @include display_flex(row);
+    @include align(center, center, center);
+  }
+}
+
+.boxes_row {
+  @include display_flex(row);
+  @include align(space-between, stretch, stretch);
+  @include flex(1);
+}
+
+.box {
+  @include display_flex(column);
+  padding:4px;
+  > * {
+    background-color: $dark_grey;
+    color: $light_grey;
+    border-radius: 3px;
+    @include flex(1);
+    @include display_flex(column);
+    @include align(center, center, center);
+  }
+}
+
+.train_offline {
+  background-color: $light_grey;
+  color: $dark_grey;
+}
+
+.stream_container {
+  @include display_flex(row);
+}
+
+.stream_element {
+  @include flex(1 1 50%);
+  padding: 4px;
+  position: relative;
+  .stream_img {
+    width: 100%;
+    border-radius: 3px;
+  }
+  .loading {
+    display: none;
+    position: absolute;
+    z-index: 10;
+    border-radius: 3px;
+    left: calc(50% - 16px);
+    top: calc(50% - 16px);
+  }
+}
+
+.log_p {
+  white-space: pre-wrap;
+}

@@ -1,0 +1,82 @@
+<% provide(:title, "Administration") %>
+
+<div class="content_center_box">
+  <div class="title_row">
+    <h1>Administration</h1>
+  </div>
+
+  <div class="row">
+    <h3>Tabelle: Z&uuml;ge</h3>
+    <p>Einträge: <%= @trains.count %></p>
+    <div class="text_right">
+      <%= link_to "Anzeigen", trains_path, class: "btn_green" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <h3>Tabelle: User</h3>
+    <p>Einträge: <%= @users.count %></p>
+    <div class="text_right">
+      <%= link_to "Anzeigen", users_path, class: "btn_green" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <h3>Tabelle: Zugtypen</h3>
+    <p>Einträge: <%= @traintypes.count %></p>
+    <div class="text_right">
+      <%= link_to "Anzeigen", traintypes_path, class: "btn_green" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <h3>Logfile: Nginx</h3>
+    <p>Beschreibung: Zentralserver</p>
+    <div class="text_right">
+      <%= link_to "Accesslog", "/logs/nginx/access", class: "btn_green" %>
+      <%= link_to "Errorlog", "/logs/nginx/error", class: "btn_green" %>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <h3>Logfile: Webseite</h3>
+    <p>Beschreibung: Webseitenlog</p>
+    <div class="text_right">
+      <%= link_to "Anzeigen", "/logs/production", class: "btn_green" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <h3>Logfile: Unicorn</h3>
+    <p>Beschreibung: Webseiten Server</p>
+    <div class="text_right">
+      <%= link_to "Stdoutlog", "/logs/unicorn/stdout", class: "btn_green" %>
+      <%= link_to "Stderrlog", "/logs/unicorn/stderr", class: "btn_green" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <h3>Logfile: MySQL</h3>
+    <p>Beschreibung: Datenbank für Webseite</p>
+    <div class="text_right">
+      <%= link_to "Anzeigen", "/logs/mysql", class: "btn_green" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <h3>Logfile: Redis</h3>
+    <p>Beschreibung: Datenbank für Realtime</p>
+    <div class="text_right">
+      <%= link_to "Anzeigen", "/logs/redis", class: "btn_green" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <h3>Logfile: Socket.io</h3>
+    <p>Beschreibung: Realtime App</p>
+    <div class="text_right">
+      <%= link_to "Anzeigen", "/logs/socketio", class: "btn_green" %>
+    </div>
+  </div>
+</div>

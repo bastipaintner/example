@@ -1,0 +1,15 @@
+<%= form_for(@traintype) do |f| %>
+
+  <%= f.label :name, "Zugtyp" %>
+  <%= f.text_field :name, placeholder: "Bitte Zugtyp eingeben!",
+    class: "form-first" %>
+
+  <div class="form_footer">
+    <button type="button" class="btn_grey"
+      onclick="return location.href='<%= traintypes_path %>'">
+      Abbrechen
+    </button>
+    <%= f.submit current_page?(new_traintype_path) ? "Erstellen" : "Speichern",
+      class: "btn_green" %>
+  </div>
+<% end %>

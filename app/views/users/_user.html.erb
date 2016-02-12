@@ -1,0 +1,13 @@
+<tr>
+  <td><p><%= user.name %></p></td>
+  <td><p><%= user.admin ? "Admin" : "Leitwarte" %></p></td>
+  <td class="text_right">
+    <%= if current_page?(users_path)
+      link_to 'Anzeigen', user, class: "btn_grey"
+    end %>
+    <%= link_to 'Bearbeiten', edit_user_path(user),
+      class: "btn_green" %>
+    <%= link_to 'Löschen', user, method: :delete, data: {
+      confirm: 'Sind Sie sich sicher?' }, class: "btn_red" %>
+  </td>
+</tr>

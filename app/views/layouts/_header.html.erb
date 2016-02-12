@@ -1,0 +1,19 @@
+<header>
+  <section>
+    <%= link_to "SubwayTube", admin? ? administration_path :
+      root_path, class: "header_logo" %>
+  </section>
+  <section class="hover_section">
+    <%= link_to "Administration", administration_path if admin? %>
+    <%= link_to "Home", root_path if leitwarte? %>
+    <%= link_to "Hilfe", help_path %>
+    <%= link_to "Über", about_path %>
+    <div class="header_dropdown" data-toggle="dropdown"
+      data-target="#user_dropdown">
+      <label><%= @current_user.name %></label>
+      <ul id="user_dropdown">
+        <li><%= link_to "Abmelden", logout_path, method: "delete" %></li>
+      </ul>
+    </div>
+  </section>
+</header>

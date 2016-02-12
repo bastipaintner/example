@@ -1,0 +1,28 @@
+window.history.replaceState({}, "",'<%= j "/zug/#{@train.name}/#{@time}" %>');
+
+if ($(".loading").css("display") == "inline-block") {
+  $(".loading").css("display", "none");
+} else {
+  $(".stored").addClass("loaded");
+}
+setTimeout(function(){
+  $(".loading").css("display", "none");
+}, 1000);
+<% for i in 1..8 %>
+  $("#<%= j getImgId(i) %>").attr("src", "<%= getImgPath(i) %>");
+<% end %>
+
+
+
+var prev, next, time
+prev = $("#prev-<%= @train.id %>");
+next = $("#next-<%= @train.id %>");
+time = $("#time-stored-<%= @train.id %>");
+
+prev.attr("href", "<%= j @control[:prev][:href] %>");
+prev.attr("class", "<%= j @control[:prev][:options][:class] %>");
+
+next.attr("href", "<%= j @control[:next][:href] %>");
+next.attr("class", "<%= j @control[:next][:options][:class] %>");
+
+time.text("<%= j @control[:time][:value] %>");
