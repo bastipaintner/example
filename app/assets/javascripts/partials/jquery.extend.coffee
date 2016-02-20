@@ -6,6 +6,8 @@ jQuery.fn.extend
     font_size = if p_width < p_height/2.5 then 14 else font_size
     @css "font-size", font_size
 
-  contentMarginTop: () ->
-    height = $("header").height()
-    @css "padding-top", height + 4
+  contentMargin: () ->
+    h_height = $("header").height()
+    f_height = $(".footer").height()
+    @css "padding-top", h_height + 4
+    @css "padding-bottom", f_height + 4

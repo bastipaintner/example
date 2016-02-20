@@ -13,6 +13,7 @@ class ImagesController < ApplicationController
       @cam_num = 1
       train_ip = ""
       @train =  Train.find_by name: "997"
+      @time = getTimeStampSix request.env['HTTP_CONTENT_DISPOSITION']
     elsif cam_ip == "192.168.178.32"
       @cam_num = 1
       train_ip = ""
@@ -23,7 +24,8 @@ class ImagesController < ApplicationController
       @train = Train.find_by ip_address: train_ip
     end
 
-    @time = getTimeStamp request.env['HTTP_CONTENT_DISPOSITION']
+    @time = getTimeStampSix request.env['HTTP_CONTENT_DISPOSITION'] if @train.name == "301"
+    @time = getTimeStamp request.env['HTTP_CONTENT_DISPOSITION'] if @train.name != "301"
     @time_readable = Time.strptime(@time, time_f).strftime time_r_f
     file_name = @time + ".jpg"
 
@@ -32,6 +34,9 @@ class ImagesController < ApplicationController
     pushImages
     deleteImages
     render text: "Upload OK\r\n"
+    logger.info "Train: #{@train.name}, Cam-Num: #{@cam_num}, Img-Time:
+    #{@time_readable}, Server-Time: #{Time.now.strftime(time_r_f)}, Stream-Time:
+     #{getStreamTime}"
   end
 
   def show
@@ -50,6 +55,16 @@ class ImagesController < ApplicationController
   end
 
   private
+    def getStreamTime
+      begin
+        time = $redis.get "time_stream"
+      rescue
+        logger.error "No redis connection!\r\n"
+      end
+      time = time.nil? ? @@zero_time : time
+      Time.strptime(time, "%Y%m%d%H%M%S").strftime "%d.%m.%Y %H:%M:%S"
+    end
+
     def check_param param
       param.is_i? ? param : 0
     end
@@ -95,9 +110,18 @@ class ImagesController < ApplicationController
     end
 
     def getTimeStamp disposition
-      time = disposition.match(/^attachment; filename=\"(?<name>.*)\"/)[:name]
+      time = disposition.match(/^attachment; filename=\"(?<time>.*)\"/)[:time]
       time = Time.now.strftime "%Y%m%d%H%M%S" if time.blank?
       time = time.to_i
       (time - (time % 2)).to_s
+    end
+
+    def getTimeStampSix disposition
+      time = disposition.match(/^attachment; filename=\"(?<time>.*)\"/)[:time]
+      time = Time.now.strftime "%Y%m%d%H%M%S" if time.blank?
+      sec = time[-2, 2]
+      rest = time[0..-3]
+      sec = (sec.to_i - sec.to_i % 6).to_s
+      rest + sec
     end
 end

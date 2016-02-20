@@ -13,5 +13,7 @@ module SubwayTube
 
     config.assets.paths << "#{Rails.root}/app/assets/fonts"
 
+    config.x.custom_vars = Rails.application.config_for :custom_vars
+
   end
 end

@@ -1,0 +1,9 @@
+default: &default
+  stream_rate: 2
+  stream_delay: 10
+
+production:
+  <<: *default
+
+development:
+  <<: *default

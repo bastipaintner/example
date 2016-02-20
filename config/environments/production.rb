@@ -39,7 +39,7 @@ Rails.application.configure do
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
-  # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
+  config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = false
@@ -49,7 +49,7 @@ Rails.application.configure do
   config.log_level = :debug
 
   # Limit logfile size to 5 MB
-  config.logger = Logger.new(config.paths["log"].first, 1, 5242880)
+  # config.logger = Logger.new(config.paths["log"].first, 1, 5242880)
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]

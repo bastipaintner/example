@@ -43,6 +43,7 @@
     background-color: $dark_grey;
     color: $light_grey;
     border-radius: 3px;
+    border: 1px solid $border;
     @include flex(1);
     @include display_flex(column);
     @include align(center, center, center);
@@ -50,8 +51,8 @@
 }
 
 .train_offline {
-  background-color: $light_grey;
-  color: $dark_grey;
+  background-color: $background;
+  color: $color;
 }
 
 .stream_container {

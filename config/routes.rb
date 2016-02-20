@@ -26,9 +26,4 @@ Rails.application.routes.draw do
   # Lifebilder Routes:
   post    'upload'                  =>  'images#create'
   get     'images/:id/:num/:time'   =>  'images#show'
-
-
-
-
-  # get     'test'                =>  'static_pages#test'
 end

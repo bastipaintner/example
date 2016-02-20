@@ -4,7 +4,7 @@ var winston = require('winston');
 
 var store = redis.createClient();
 var sub = redis.createClient();
-var logfile = '/var/www/subway_tube/log/socketio.log'
+var logfile = '/var/www/subway_tube/log/socketio.log';
 
 var logger = new (winston.Logger)({
   transports: [
@@ -35,12 +35,16 @@ store.on("error", function(err) {
     logger.error("Error connecting to redis", err);
 });
 
+sub.on("error", function(err) {
+    logger.error("Error connecting to redis", err);
+});
+
 logger.info('Service startet!...');
 
 function pushImages() {
   var time = getTimeStamp();
   var stream_hash = "stream_" + time;
-  var trains_arr = [];
+  // var trains_arr = [];
 
   store.set("time_stream", time);
 
@@ -48,8 +52,8 @@ function pushImages() {
     io.emit('stream', msg);
     msg = msg ? msg : "";
     for (var train in msg) {
-      if(train != 'time_stamp' && train != 'time_readable' && train != 'name') {
-        trains_arr.push(train);
+      if(train != 'time_stamp' && train != 'time_readable') {
+        // trains_arr.push(train);
         store.exists(train, function(err, message){
           var train_id = this["args"].toString();
           if (message == 0) {
@@ -57,11 +61,11 @@ function pushImages() {
             io.emit('online', train_id);
             logger.info("set " + train_id);
           }
-          store.expire(train_id, 10);
+          store.expire(train_id, 20);
         });
       }
     }
-    store.set("trains_online", trains_arr.toString());
+    // store.set("trains_online", trains_arr.toString());
     store.del(stream_hash);
   });
 }
@@ -69,7 +73,7 @@ function pushImages() {
 function getTimeStamp() {
   var year, month, day, hours, minutes, seconds, time;
   time = new Date();
-  time.setSeconds(time.getSeconds() - 10);
+  time.setSeconds(time.getSeconds() - 20);
   year = time.getFullYear();
   month = getFullDatePart(time.getMonth() + 1);
   day = getFullDatePart(time.getDate());

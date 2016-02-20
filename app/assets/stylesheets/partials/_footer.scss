@@ -7,8 +7,9 @@
   bottom: 0px;
   left: 0px;
   padding: 0px 12px;
-  background-color: $header_background;
-  color: $header_color;
+  background-color: $background;
+  color: $color;
+  border-top: 2px solid $border;
   font-weight: 800;
   font-size: 20px;
   z-index: 100;

@@ -10,8 +10,8 @@ $ ->
 prev = ->
   href = $(".prev").attr "href"
   if href != ""
-    $(".prev").click()
     loading()
+    $(".prev").click()
 
 p_p = ->
   href = $(".p_p").attr "href"
@@ -21,14 +21,13 @@ p_p = ->
 next = ->
   href = $(".next").attr "href"
   if href != ""
-    $(".next").click()
     loading()
+    $(".next").click()
 
 loading = ->
-  if !$(".stored").hasClass "loaded"
-    setTimeout ->
-      if $(".stored").hasClass "loaded"
-        $(".stored").removeClass "loaded"
-      else
-        $(".stored").children(".loading").css "display", "inline-block"
-    , 500
+  setTimeout ->
+    if !$(".stored").hasClass("loaded")
+      $(".stored").children(".loading").css "display", "inline-block"
+    else
+      $(".stored").removeClass("loaded")
+  , 300

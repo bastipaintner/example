@@ -1,18 +1,7 @@
 module ControlPagesHelper
   # ermittlet ob ein Zug online ist
   def online? train_id
-    begin
-      trains = $redis.get "trains_online" # lädt Liste mit online Zügen
-    rescue # bei Fehler
-      logger.error "No redis connection!\r\n"
-    end
-
-    if !trains.blank? # wenn Züge gefunden
-      trains = trains.split %r{,\s*}  # in Array laden
-      trains.include? train_id.to_s   # bestimmten ob der Gesuchte dabei ist
-    else
-      false
-    end
+    $redis.exists train_id
   end
 
   def getClass train_id

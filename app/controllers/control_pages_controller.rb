@@ -21,15 +21,6 @@ class ControlPagesController < ApplicationController
       p_p: getPlayPauseData, time: getTimeField }
   end
 
-  def prev_or_next
-
-
-    respond_to do |format|
-      format.html {redirect_to root_url}
-      format.js
-    end
-  end
-
   private
     @@zero_time = "00000000000000"
 
@@ -85,7 +76,8 @@ class ControlPagesController < ApplicationController
     def getNextLinkData
       img = Image.where("train_id = :id", {id: @train.id}).first
       next_1 = img.nil? ? false : (img.time_stamp > @time)
-      next_2 = @mode == "stream" ? false : (@time < getStreamTime)
+      next_2 = (@time < getStreamTime || getStreamTime == @@zero_time)
+      next_2 = false if @mode == "stream"
       nex_t = next_1 && next_2 ? true : false
       path = File.join "/zug", @train.name, @time.to_s + "?pn=next"
       path = "" if !nex_t

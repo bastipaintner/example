@@ -1,13 +1,17 @@
 window.history.replaceState({}, "",'<%= j "/zug/#{@train.name}/#{@time}" %>');
 
-if ($(".loading").css("display") == "inline-block") {
-  $(".loading").css("display", "none");
-} else {
-  $(".stored").addClass("loaded");
-}
+// if ($(".loading").css("display") == "inline-block") {
+//   $(".loading").css("display", "none");
+//   $(".stored").removeClass("loaded");
+// } else {
+//   $(".stored").addClass("loaded");
+// }
+$(".stored").addClass("loaded");
 setTimeout(function(){
   $(".loading").css("display", "none");
-}, 1000);
+  // $(".stored").removeClass("loaded");
+}, 50);
+
 <% for i in 1..8 %>
   $("#<%= j getImgId(i) %>").attr("src", "<%= getImgPath(i) %>");
 <% end %>

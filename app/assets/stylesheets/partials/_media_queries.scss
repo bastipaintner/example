@@ -1,6 +1,5 @@
 @media all and (min-width: 1000px) {
-  .box { @include flex(1); }
-  .boxes_row { @include flex(1); }
+  .box, .boxes_row { @include flex(1); }
   .stream_container { @include flex(1 1 50%); }
   .footer > section { @include flex(1 1 33%); }
 }
@@ -13,9 +12,9 @@
 
 @media all and (max-width: 500px) {
   .box { @include flex(1 50%); }
-  .stream_container { @include flex(1 1 100%); }
-  .stream_element { @include flex(1 1 100%); }
-  .footer > section { @include flex(1 1 100%); }
+  .stream_container, .stream_element, .footer > section {
+    @include flex(1 1 100%);
+  }
 }
 
 @media all and (min-height: 500px) {

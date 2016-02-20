@@ -10,6 +10,7 @@ header {
   background-color: $header_background;
   color: $header_color;
   z-index: 100;
+  border-bottom: 2px solid $border;
   section {
     @include display_flex(row);
     > * {
@@ -34,14 +35,17 @@ header {
     position: absolute;
     top: 100%;
     right: 0px;
+    padding: 4px;
+    border-radius: 3px;
     display: none;
+    border: 1px solid $dropdown_border;
+    background-color: $dropdwon_background;
   }
   li {
     padding: 1px 8px;
     margin: 4px 0px;
     border-radius: 3px;
-    background-color: $dark_grey;
-    color: $light_grey;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7)
+    color: $dropdwon_color;
+    // box-shadow: 0px 0px 7px rgba(255, 255, 255, 1)
   }
 }

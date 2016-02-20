@@ -39,17 +39,6 @@ class ApplicationController < ActionController::Base
 
     # Prüft ob ein Zug online ist
     def online? train_id
-      begin
-        trains = $redis.get "trains_online" # Liste von Online-Zügen
-      rescue
-        logger.error "No redis connection!\r\n" # Verbindugsprobleme zu Redis
-      end
-
-      if !trains.blank? # Ist die Variable nicht leer?
-        trains = trains.split %r{,\s*} # Züge in Array laden
-        trains.include? train_id.to_s # Überprügen ob gesuchter Zug dabei
-      else
-        false
-      end
+      $redis.exists train_id
     end
 end

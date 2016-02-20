@@ -1,20 +1,19 @@
 .form_wrapper {
   @include flex(0 1 400px);
+  border-radius: 3px;
   h1 {
     margin: 0px;
-    background-color: $form_background_2;
+    background-color: $form_element_background;
     @include border_padding(3px 3px 0px 0px, 4px);
     text-align: center;
+    border-bottom: 2px solid $border;
   }
 }
 
 form {
   @include display_flex(column);
-  background-color: $form_background_1;
+  background-color: $form_background;
   @include border_padding(0px 0px 3px 3px, 4px 10px);
-  .form_element {
-    margin: 5px 0px;
-  }
   .row {
     justify-content: space-between;
   }
@@ -23,7 +22,7 @@ form {
     @include align(center, center, center);
   }
   input, select, textarea {
-    background-color: $form_background_2;
+    background-color: $form_element_background;
     margin-bottom: 5px;
   }
   label {

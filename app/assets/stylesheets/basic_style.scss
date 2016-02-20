@@ -90,7 +90,7 @@ table {
 }
 
 thead > tr > th {
-  border-bottom: 1px solid $text-color;
+  border-bottom: 1px solid $color;
 }
 
 tbody > tr:nth-child(even) {
@@ -102,7 +102,7 @@ tbody > tr:nth-child(even) {
 }
 
 .faded_out {
-  color: $semi_dark_grey;
+  color: $second_background;
   cursor: not-allowed;
 }
 
