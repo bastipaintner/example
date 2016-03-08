@@ -7,6 +7,15 @@ $ ->
       when 37 then prev() # left arrow
       when 39 then next() # right arrow
 
+  $(".stream_img").load ->
+    $(".loading").css "display", "none"
+    $(".stored").addClass "loaded"
+    setTimeout ->
+      $(".loading").css "display", "none"
+      $(".stored").removeClass "loaded"
+    , 1000
+
+
 prev = ->
   href = $(".prev").attr "href"
   if href != ""
@@ -26,8 +35,8 @@ next = ->
 
 loading = ->
   setTimeout ->
-    if !$(".stored").hasClass("loaded")
+    if !$(".stored").hasClass "loaded"
       $(".stored").children(".loading").css "display", "inline-block"
     else
       $(".stored").removeClass("loaded")
-  , 300
+  , 1000

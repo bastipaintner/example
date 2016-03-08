@@ -10,7 +10,7 @@ class Image < ActiveRecord::Base
       root = "#{Rails.root}/public/uploads/image"
       path = "#{root}/#{self.train_id}/#{i}/#{self.time_stamp}.jpg"
       begin
-        File.delete File.join "public", self.path if File.file? path
+        File.delete path if File.file? path
       rescue
         logger.error "Error deleting file: '#{path}'"
       end

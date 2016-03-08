@@ -5,19 +5,20 @@ var winston = require('winston');
 var store = redis.createClient();
 var sub = redis.createClient();
 var logfile = '/var/www/subway_tube/log/socketio.log';
+var logfile_error = '/var/www/subway_tube/log/socketio.error.log';
 
 var logger = new (winston.Logger)({
   transports: [
     new winston.transports.Console(),
     new winston.transports.File({
-      filename: '../log/socketio.log',
+      filename: logfile,
       json:false,
       maxsize: 1000000
    })
   ],
   exceptionHandlers: [
     new winston.transports.File({
-      filename: '../log/socketio.log',
+      filename: logfile_error,
       json:false,
       maxsize: 1000000
     })
@@ -44,16 +45,16 @@ logger.info('Service startet!...');
 function pushImages() {
   var time = getTimeStamp();
   var stream_hash = "stream_" + time;
-  // var trains_arr = [];
 
+  logger.info('Time: ' + time + '\n------------------------------------------');
   store.set("time_stream", time);
 
   store.hgetall(stream_hash, function(err, msg){
+    logger.info('Trains: ' + msg);
     io.emit('stream', msg);
     msg = msg ? msg : "";
     for (var train in msg) {
       if(train != 'time_stamp' && train != 'time_readable') {
-        // trains_arr.push(train);
         store.exists(train, function(err, message){
           var train_id = this["args"].toString();
           if (message == 0) {
@@ -65,7 +66,6 @@ function pushImages() {
         });
       }
     }
-    // store.set("trains_online", trains_arr.toString());
     store.del(stream_hash);
   });
 }

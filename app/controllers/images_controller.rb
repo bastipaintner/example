@@ -6,14 +6,13 @@ class ImagesController < ApplicationController
     time_f = "%Y%m%d%H%M%S"
     time_r_f = "%d.%m.%Y %H:%M:%S"
 
-    cam_ip = request.remote_ip # development
-    # cam_ip = env["HTTP_X_FORWARDED_FOR"] # Bestimmung der ursprungs IP
+    cam_ip = request.remote_ip if !Rails.env.production?
+    cam_ip = env["HTTP_X_FORWARDED_FOR"] if Rails.env.production?
 
     if cam_ip == "192.168.178.22"
       @cam_num = 1
       train_ip = ""
       @train =  Train.find_by name: "997"
-      @time = getTimeStampSix request.env['HTTP_CONTENT_DISPOSITION']
     elsif cam_ip == "192.168.178.32"
       @cam_num = 1
       train_ip = ""
@@ -24,19 +23,31 @@ class ImagesController < ApplicationController
       @train = Train.find_by ip_address: train_ip
     end
 
-    @time = getTimeStampSix request.env['HTTP_CONTENT_DISPOSITION'] if @train.name == "301"
-    @time = getTimeStamp request.env['HTTP_CONTENT_DISPOSITION'] if @train.name != "301"
+    @time = getTimeStamp request.env['HTTP_CONTENT_DISPOSITION']
     @time_readable = Time.strptime(@time, time_f).strftime time_r_f
     file_name = @time + ".jpg"
 
-    saveImage request.body.read
-    Image.where(train_id: @train.id, time_stamp: @time).first_or_create
-    pushImages
-    deleteImages
+    # saveImage request.body.read
+    # Image.where(train_id: @train.id, time_stamp: @time).first_or_create
+    # pushImages
+    # deleteImages
+    # render text: "Upload OK\r\n"
+    # logger.info "Train: #{@train.name}, Cam-Num: #{@cam_num}, Img-Time:
+    # #{@time_readable}, Server-Time: #{Time.now.strftime(time_r_f)}, Stream-Time:
+    #  #{getStreamTime}"
+
+    img = request.body.read
+
+    for i in 1..8
+      saveImage img, i
+      Image.where(train_id: @train.id, time_stamp: @time).first_or_create
+      pushImages
+      deleteImages
+      logger.info "Train: #{@train.name}, Cam-Num: #{i}, Img-Time:
+       #{@time_readable}, Server-Time: #{Time.now.strftime(time_r_f)}, Stream-Time:
+        #{getStreamTime}"
+    end
     render text: "Upload OK\r\n"
-    logger.info "Train: #{@train.name}, Cam-Num: #{@cam_num}, Img-Time:
-    #{@time_readable}, Server-Time: #{Time.now.strftime(time_r_f)}, Stream-Time:
-     #{getStreamTime}"
   end
 
   def show
@@ -69,8 +80,8 @@ class ImagesController < ApplicationController
       param.is_i? ? param : 0
     end
 
-    def saveImage image_data
-      upload_dir = "public/uploads/image/#{@train.id}/#{@cam_num}"
+    def saveImage image_data, i
+      upload_dir = "public/uploads/image/#{@train.id}/#{i}"
       file_name = @time + ".jpg"
       path = File.join upload_dir, file_name
 
@@ -81,8 +92,10 @@ class ImagesController < ApplicationController
     def deleteImages
       imgs = Image.where "train_id = :train_id", { train_id: @train.id }
       numOfImages = imgs.count
+      logger.debug "Num of Images: " + numOfImages.to_s
       if numOfImages >= 1000
         num = numOfImages - 1000
+        logger.debug "Number of images too much: #{num}"
         imgs.reorder("time_stamp ASC").take(num).each do |img|
           begin
             img.destroy
@@ -96,8 +109,10 @@ class ImagesController < ApplicationController
     def pushImages
       stream_hash = "stream_#{@time}"
 
+      logger.info "Redis: "
+
       if !$redis.hexists stream_hash, @train.id
-        $redis.hset stream_hash, @train.id, @train.name
+        logger.info "Redis set: " + $redis.hset(stream_hash, @train.id, @train.name).to_s
       end
 
       if !$redis.hexists stream_hash, "time_stamp"

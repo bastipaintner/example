@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
-  get 'event/index'
 
   # Leitwarten Routes:
   root 'control_pages#index'
-  # resources :control_pages, path: '/zug'
   get '/zug/:id'                    =>  'control_pages#show'
   get '/zug/:id/:time'              =>  'control_pages#show'
   get '/zug/:id/:time/:p_or_n'      =>  'control_pages#show'
@@ -19,9 +17,9 @@ Rails.application.routes.draw do
 
   # Administrative Routes:
   get     'administration'          =>  'static_pages#administration'
-  resources :trains, :users, :traintypes
   get     'logs/:app'               =>  'logfiles#show'
   get     'logs/:app/:type'         =>  'logfiles#show'
+  resources :trains, :users, :traintypes
 
   # Lifebilder Routes:
   post    'upload'                  =>  'images#create'

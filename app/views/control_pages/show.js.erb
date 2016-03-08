@@ -1,22 +1,8 @@
 window.history.replaceState({}, "",'<%= j "/zug/#{@train.name}/#{@time}" %>');
 
-// if ($(".loading").css("display") == "inline-block") {
-//   $(".loading").css("display", "none");
-//   $(".stored").removeClass("loaded");
-// } else {
-//   $(".stored").addClass("loaded");
-// }
-$(".stored").addClass("loaded");
-setTimeout(function(){
-  $(".loading").css("display", "none");
-  // $(".stored").removeClass("loaded");
-}, 50);
-
 <% for i in 1..8 %>
   $("#<%= j getImgId(i) %>").attr("src", "<%= getImgPath(i) %>");
 <% end %>
-
-
 
 var prev, next, time
 prev = $("#prev-<%= @train.id %>");

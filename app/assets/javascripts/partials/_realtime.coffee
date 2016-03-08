@@ -1,7 +1,7 @@
 # Funktionen zur Umsetzung der Echtzeitfähigkeit
 $ ->
   if !@socket
-    @socket = io.connect "http://0.0.0.0:5001" # Verbindung zum Server
+    @socket = io.connect() # "http://0.0.0.0:5001" # Verbindung zum Server
               # for development: "http://0.0.0.0:5001"
 
     @socket.on "stream", (msg) ->
