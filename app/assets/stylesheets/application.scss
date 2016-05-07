@@ -1,9 +1,12 @@
-/* Subway Monitoring System | Stylesheet
- *
- * Author: Sebastian Paintner
- *
- *= require_self
- */
+/*******************************************************************************
+* includes all application styles                                              *
+*                                                                              *
+* author: Sebastian Paintner                                                   *
+*                                                                              *
+* path: app/assets/stylesheets/application.scss                                *
+*******************************************************************************/
+
+/*= require_self */
 
 /* variables */
 @import "vars";

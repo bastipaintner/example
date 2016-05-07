@@ -1,6 +1,5 @@
-<% @modal_title = "Fehler" %>
-<ul>
+<div class="content_center_box">
   <% flash.each do |message_type, message| %>
-    <li class="<%= message_type %>"><%= message %></li>
+    <div class="flash_row <%= message_type %>"><%= message %></div>
   <% end %>
-</ul>
+</div>

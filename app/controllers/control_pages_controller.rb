@@ -1,11 +1,19 @@
+################################################################################
+# controller for control_pages (stream-page and train-page)                    #
+#                                                                              #
+# author: Sebastian Paintner                                                   #
+#                                                                              #
+# path: app/controllers/control_pages_controller.rb                            #
+################################################################################
 class ControlPagesController < ApplicationController
-  before_filter :leitwarten_user
+  before_filter :leitwarten_user # only accessible for "Leitwarte"
   def index
     @trains = Train.all
     @num = 1
     @numOfTrains = @trains.count
-    @numOfRows = (@numOfTrains / 10).ceil
-    @numOfEmptyRows = @numOfRows - (@numOfTrains - 10 * @numOfRows)
+    @numOfColumns = Math.sqrt(1.6 * @numOfTrains).floor
+    @numOfRows = (@numOfTrains / @numOfColumns).ceil
+    @numOfEmptyBoxes = @numOfColumns - (@numOfTrains - @numOfColumns*@numOfRows)
   end
 
   def show

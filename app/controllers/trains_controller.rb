@@ -1,11 +1,18 @@
+################################################################################
+# controller for trains                                                        #
+#                                                                              #
+# author: Sebastian Paintner                                                   #
+#                                                                              #
+# path: app/controllers/trains_controller.rb                                   #
+################################################################################
 class TrainsController < ApplicationController
-  before_filter :admin_user # nur für administrator
+  before_filter :admin_user # only accessible for admin
   def index
     @trains = Train.all
   end
 
   def show
-    @train = Train.find(params[:id])
+    @train = Train.find params[:id]
   end
 
   def new
@@ -13,12 +20,11 @@ class TrainsController < ApplicationController
   end
 
   def edit
-    @train = Train.find(params[:id])
+    @train = Train.find params[:id]
   end
 
   def create
-    # params[]
-    @train = Train.new(train_params)
+    @train = Train.new train_params
     if @train.save
       redirect_to root_path
     else
@@ -27,8 +33,8 @@ class TrainsController < ApplicationController
   end
 
   def update
-    @train = Train.find(params[:id])
-    if @train.update_attributes(train_params)
+    @train = Train.find params[:id]
+    if @train.update_attributes train_params
       flash[:success] = "Zug erfolgreich bearbeitet"
       redirect_to @train
     else
@@ -43,8 +49,7 @@ class TrainsController < ApplicationController
   end
 
   private
-
     def train_params
-      params.require(:train).permit(:name, :traintype_id)
+      params.require(:train).permit :name, :traintype_id
     end
 end

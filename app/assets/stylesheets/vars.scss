@@ -1,66 +1,74 @@
-// ---Colors---
+/*******************************************************************************
+* variables for the page theme                                                 *
+*                                                                              *
+* author: Sebastian Paintner                                                   *
+*                                                                              *
+* path: app/assets/stylesheets/vars.scss                                       *
+*******************************************************************************/
 
-// Green:
+/* Green */
 $lightest_green: #e3ece6;
 $light_green: #e0f5ee;
 $green: #a3c1ad;
 
-// Red:
+/* Red */
+$light_red: #f6bfb7;
 $red: #f19588;
 $dark_red: #eb604c;
 
-// Grey:
+/* Grey */
 $lightest_grey: #eee;
 $light_grey: #e2e2e2;
 $grey: #c6c6c6;
 $dark_grey: #777777;
 $darkest_grey: #474747;
 
-// Lila:
+/* Lila */
 $lila: #ada3c1;
 
-// Turquoise:
+/* Turquoise */
 $turquoise: #8ab2aa;
 $dark_turquoise: #589186;
 
 
-// ---General---
+/** General **/
 
 $background: $lightest_grey;
 $color: $dark_grey;
 $border: $dark_grey;
 $second_background: $grey;
 
-// ---Categories---
+/** Categories **/
 
-// Header:
+/* Header */
 $header_background: $background;
 $header_color: $color;
 $header_hover_background: $second_background;
 $header_border: $border;
 
-// Page:
+/* Page */
 $page_background: #fff;
-
 $content_background: $background;
 
-// Modal:
+/* Modal */
 $modal_background: $background;
 $modal_header_background: $grey;
 $modal_header_color: $color;
 $modal_color: $color;
 
-// Form:
+/* Form */
 $form_background: $background;
 $form_element_background: $second_background;
+$error: $red;
+$error_background: $light_red;
 
-// Text:
+/* Text */
 $text_color: $color;
 
-// Dropdown:
+/* Dropdown */
 $dropdwon_background: $background;
 $dropdwon_color: $color;
 $dropdown_border: $border;
 
-// Buttons:
+/* Buttons */
 $btn_background: $second_background;

@@ -1,3 +1,10 @@
+/*******************************************************************************
+* mixings                                                                      *
+*                                                                              *
+* author: Sebastian Paintner                                                   *
+*                                                                              *
+* path: app/assets/stylesheets/mixings.scss                                    *
+*******************************************************************************/
 @mixin display_flex($direction) {
   display: flex;
   display: -webkit-flex;
@@ -29,41 +36,4 @@
 @mixin border_padding($border, $padding) {
   border-radius: $border;
   padding: $padding;
-}
-
-
-
-// dsfasdfasdfasdfsdafds
-@mixin full-border($color, $radius) {
-  border: 1px solid $color;
-  border-radius: $radius;
-}
-
-@mixin basic-btn($color, $color-hover) {
-  border-radius: 4px;
-  padding: 4px;
-  display: inline-block;
-  width: auto;
-  background-color: $color;
-  cursor: pointer;
-  border:none;
-  font-size: 14px;
-  &:hover {
-    background-color: $color-hover;
-  }
-}
-
-@mixin btn ($color, $color-hover) {
-  color: #fff;
-  box-shadow: $element-shadow;
-  margin: 5px 0px;
-  @include basic-btn($color, $color-hover);
-}
-
-@mixin btn-hover ($color-text, $color-hover) {
-  color: $color-text;
-  @include basic-btn(transparent, $color-hover);
-  &:hover {
-    color: #fff;
-  }
 }

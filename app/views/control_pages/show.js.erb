@@ -1,3 +1,11 @@
+<%##############################################################################
+# script for control pages                                                     #
+# load prev oder next images                                                   #
+#                                                                              #
+# author: Sebastian Paintner                                                   #
+#                                                                              #
+# path: app/views/control_pages/show.js.erb                                    #
+##############################################################################%>
 window.history.replaceState({}, "",'<%= j "/zug/#{@train.name}/#{@time}" %>');
 
 <% for i in 1..8 %>

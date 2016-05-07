@@ -1,3 +1,11 @@
+<%##############################################################################
+# view for static pages                                                        #
+# administration page                                                          #
+#                                                                              #
+# author: Sebastian Paintner                                                   #
+#                                                                              #
+# path: app/views/static_pages/administration.html.erb                         #
+##############################################################################%>
 <% provide(:title, "Administration") %>
 
 <div class="content_center_box">
@@ -35,15 +43,6 @@
     <div class="text_right">
       <%= link_to "Accesslog", "/logs/nginx/access", class: "btn_green" %>
       <%= link_to "Errorlog", "/logs/nginx/error", class: "btn_green" %>
-    </div>
-  </div>
-
-
-  <div class="row">
-    <h3>Logfile: Webseite</h3>
-    <p>Beschreibung: Webseitenlog</p>
-    <div class="text_right">
-      <%= link_to "Anzeigen", "/logs/production", class: "btn_green" %>
     </div>
   </div>
 

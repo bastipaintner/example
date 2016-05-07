@@ -1,12 +1,18 @@
-# Funktionen für control_pages
+################################################################################
+# functions for control elements                                               #
+#                                                                              #
+# author: Sebastian Paintner                                                   #
+#                                                                              #
+# path: app/assets/javascripts/partials/_control.coffee                        #
+################################################################################
 $ ->
-  # Einbinden der Tastatur
   $(document).keydown (e) ->
     switch e.keyCode
       when 32 then p_p() # space
       when 37 then prev() # left arrow
       when 39 then next() # right arrow
 
+  # remove loading animation
   $(".stream_img").load ->
     $(".loading").css "display", "none"
     $(".stored").addClass "loaded"
@@ -33,6 +39,7 @@ next = ->
     loading()
     $(".next").click()
 
+# loading animation when clicking next or prev image
 loading = ->
   setTimeout ->
     if !$(".stored").hasClass "loaded"

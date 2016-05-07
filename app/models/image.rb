@@ -1,3 +1,10 @@
+################################################################################
+# model for images                                                             #
+#                                                                              #
+# author: Sebastian Paintner                                                   #
+#                                                                              #
+# path: app/models/image.rb                                                    #
+################################################################################
 class Image < ActiveRecord::Base
   belongs_to :train
   validates :time_stamp, presence: true

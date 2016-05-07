@@ -1,10 +1,18 @@
+<%##############################################################################
+# view for control_pages                                                       #
+# stream page                                                                  #
+#                                                                              #
+# author: Sebastian Paintner                                                   #
+#                                                                              #
+# path: app/views/control_pages/show.html.erb                                  #
+##############################################################################%>
 <% provide(:title, @train.name) %>
 <% provide(:header_title, "Zug: " + @train.name) %>
 <div class="title_row text_center">
   <h3>Zug: <%= @train.name %></h3>
 </div>
 <div id="<%= @mode %>" data-train="<%= @train.name %>">
-  <%= render 'train_element' %>
+  <%= render 'stream_element' %>
   <div id="control_element" class="footer">
     <%= render 'control_element' %>
   </div>

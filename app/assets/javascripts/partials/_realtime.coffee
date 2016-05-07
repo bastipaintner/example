@@ -1,22 +1,30 @@
-# Funktionen zur Umsetzung der Echtzeitfähigkeit
+################################################################################
+# functions for realtime                                                       #
+#                                                                              #
+# author: Sebastian Paintner                                                   #
+#                                                                              #
+# path: app/assets/javascripts/partials/_realtime.coffee                       #
+################################################################################
 $ ->
   if !@socket
-    @socket = io.connect() # "http://0.0.0.0:5001" # Verbindung zum Server
-              # for development: "http://0.0.0.0:5001"
+    @socket = io.connect() # "http://0.0.0.0:5001" # for development
 
+    # channel "stream"
     @socket.on "stream", (msg) ->
       msg = if msg == null then {} else msg
       stream msg
 
+    # channel "online"
     @socket.on "online", (msg) ->
       train = if msg == null then "" else msg
       setStatus msg, 1
 
+    # channel "offline"
     @socket.on "offline", (msg) ->
       train = if msg == null then "" else msg
       setStatus msg, 0
 
-
+  # change status of trains and change buttons
   setStatus = (train_id, status) ->
     train = $("#train_#{train_id}").children "a"
     patt = /\d+/
@@ -44,6 +52,7 @@ $ ->
       else
         train.addClass "train_offline" if !train.hasClass "train_offline"
 
+  # change live images, play_pause button and next button
   stream = (msg) ->
     patt = /\d+/
     images = $(".stream_element")

@@ -1,14 +1,24 @@
+<%##############################################################################
+# view for control_pages                                                       #
+# controls for stream page                                                     #
+#                                                                              #
+# author: Sebastian Paintner                                                   #
+#                                                                              #
+# path: app/views/control_pages/_control_element.html.erb                      #
+##############################################################################%>
 <section>
   <label>Status:</label>
   <p id="stream-status"><%= (@mode == "stream") ? "Play" : "Pause" %></p>
   <p id="control_status"><%= "(offline)" if !online? @train.id %></p>
 </section>
+
 <section class="control_font">
   <%= link_to "p", @control[:prev][:href], @control[:prev][:options] %>
   <%= link_to @control[:p_p][:value], @control[:p_p][:href],
     @control[:p_p][:options] %>
   <%= link_to "n", @control[:next][:href], @control[:next][:options] %>
 </section>
+
 <section>
   <label>Zeit:</label>
   <p id="<%= @control[:time][:id] %>" class="time">

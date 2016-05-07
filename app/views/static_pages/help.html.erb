@@ -1,11 +1,51 @@
-<% provide(:title, "Help") %>
-<div class="content-center-box">
-  <div class="content-title">
-    <h1>Subway Monitoring System Hilfe</h1>
+<%##############################################################################
+# view for static pages                                                        #
+# help page                                                                    #
+#                                                                              #
+# author: Sebastian Paintner                                                   #
+#                                                                              #
+# path: app/views/static_pages/help.html.erb                                   #
+##############################################################################%>
+<% provide(:title, "Hilfe") %>
+<div class="content_center_box">
+  <div class="title_row">
+    <h1>SubwayTube Hilfe</h1>
   </div>
-  <div class="content-element">
-    <p>
-      Hilfe
-    </p>
+  <div class="row">
+    <div class="column">
+      <h3>Zugseite:</h3>
+      <div class="row">
+        <div style="width:50%;">
+          <p><br>
+            Die Zugseite gibt eine Übersicht über alle U-Bahnen, die mit Datenfunk
+            ausgestattet sind. Jede Kachel steht für einen P2 Zug.
+            Je nachdem ein Zug online oder offline ist ändert sich das Aussehen einer
+            Kachel. In dem rechts abgebildeten Beispiel sind die Züge 997 und 998
+            online und der Rest offline.
+            Durch einen Klick auf ein Zugelement kommt man direkt zu der Stream-Seite.
+            Ist ein Zug online, dann werden die Live-Bilder angezeigt, ist ein Zug
+            offline, so werden die gespeicherten- angezeigt.
+          </p>
+        </div>
+        <div style="width:50%;">
+          <%= image_tag "zugseite.jpg", width: '90%' %>
+        </div>
+      </div>
+      <h3>Stream-Seite:</h3>
+      <div class="row">
+        <div style="width:50%;">
+          <%= image_tag "streamseite.jpg", width: '90%' %>
+        </div>
+        <div style="width:50%;">
+          <p><br>
+            Auf der links abgebildeten Stream-Seite sieht man jeweils acht Bilder eines
+            Zuges. Es gibt die Möglichkeit zwischen gespeicherten- und Live-Bildern,
+            über den Play-Pause-Knopf in der Fußleiste, umzuschalten.
+            Werden gespeicherte Bilder betrachtet, so können über die Knöpfe rechts und links
+            vom Play-Pause-Knopf die nächsten oder die vorherigen Bilder angezeigt werden.
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

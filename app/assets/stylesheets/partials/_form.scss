@@ -1,3 +1,10 @@
+/*******************************************************************************
+* form style                                                                   *
+*                                                                              *
+* author: Sebastian Paintner                                                   *
+*                                                                              *
+* path: app/assets/stylesheets/partials/_form.scss                             *
+*******************************************************************************/
 .form_wrapper {
   @include flex(0 1 400px);
   border-radius: 3px;
@@ -28,5 +35,11 @@ form {
   label {
     font-weight: 800;
     margin-top: 5px;
+  }
+  .field_with_errors{
+    input, select, textarea {
+      width: 100%;
+      background-color: $error_background;
+    }
   }
 }

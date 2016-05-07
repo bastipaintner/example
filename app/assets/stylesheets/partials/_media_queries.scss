@@ -1,3 +1,10 @@
+/*******************************************************************************
+* media queries                                                                *
+*                                                                              *
+* author: Sebastian Paintner                                                   *
+*                                                                              *
+* path: app/assets/stylesheets/partials/_media_queries.scss                    *
+*******************************************************************************/
 @media all and (min-width: 1000px) {
   .box, .boxes_row { @include flex(1); }
   .stream_container { @include flex(1 1 50%); }

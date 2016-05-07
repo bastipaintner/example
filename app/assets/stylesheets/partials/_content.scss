@@ -1,3 +1,10 @@
+/*******************************************************************************
+* content style                                                                *
+*                                                                              *
+* author: Sebastian Paintner                                                   *
+*                                                                              *
+* path: app/assets/stylesheets/partials/_content.scss                          *
+*******************************************************************************/
 .content {
   margin: 0px;
   min-height: 100%;
@@ -13,16 +20,21 @@
 .content_center_box {
   @include display_flex(column);
   align-self: center;
-  > .row {
+  > .row, > .flash_row {
     background-color: $content_background;
     border-radius: 3px;
     margin: 4px 0px;
     padding: 4px;
-    @include align(space-between, center, center);
     min-width: 700px;
     > * {
       @include flex(1 1 33%);
     }
+  }
+  > .row { @include align(space-between, center, center); }
+  > .flash_row {
+    @include align(center, center, center);
+    @include display_flex(row);
+    > * { margin: 0px; }
   }
   .title_row {
     @include display_flex(row);

@@ -1,4 +1,16 @@
+<%##############################################################################
+# view for sessions                                                            #
+# login form                                                                   #
+#                                                                              #
+# author: Sebastian Paintner                                                   #
+#                                                                              #
+# path: app/views/sessions/_form.html.erb                                      #
+##############################################################################%>
 <%= form_for(:session, url: login_path) do |f| %>
+
+  <% flash.each do |message_type, message| %>
+    <div class="flash_row <%= message_type %>"><%= message %></div>
+  <% end %>
 
   <%= f.label :login_name, "Benutzername" %>
   <%= f.text_field :login_name, class: "form-first" %>

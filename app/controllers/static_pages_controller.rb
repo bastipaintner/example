@@ -1,5 +1,11 @@
+################################################################################
+# controller for static pages                                                  #
+#                                                                              #
+# author: Sebastian Paintner                                                   #
+#                                                                              #
+# path: app/controllers/static_pages_controller.rb                             #
+################################################################################
 class StaticPagesController < ApplicationController
-  # include ActionController::Live
   before_filter :admin_user, only: [:administration]
   def help
   end
@@ -7,14 +13,10 @@ class StaticPagesController < ApplicationController
   def about
   end
 
-  def administration # nur für Administrator
+  def administration # only accessible for admin
     @trains = Train.all
     @users = User.all
     @traintypes = Traintype.all
     @images = Image.all
-  end
-
-  def test
-
   end
 end

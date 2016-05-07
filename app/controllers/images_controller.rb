@@ -1,6 +1,15 @@
+################################################################################
+# controller for uploading and showing images                                  #
+#                                                                              #
+# author: Sebastian Paintner                                                   #
+#                                                                              #
+# path: app/controllers/images_controller.rb                                   #
+################################################################################
 class ImagesController < ApplicationController
-  skip_before_action :logged_in_user, only: :create
-  skip_before_filter :verify_authenticity_token, only: :create
+  skip_before_action :logged_in_user, only: :create # to create an image you
+    # dont't have to be logged in
+  skip_before_filter :verify_authenticity_token, only: :create # to create an
+    # image you dont't have to have an authenticity token
 
   def create
     time_f = "%Y%m%d%H%M%S"
@@ -27,27 +36,14 @@ class ImagesController < ApplicationController
     @time_readable = Time.strptime(@time, time_f).strftime time_r_f
     file_name = @time + ".jpg"
 
-    # saveImage request.body.read
-    # Image.where(train_id: @train.id, time_stamp: @time).first_or_create
-    # pushImages
-    # deleteImages
-    # render text: "Upload OK\r\n"
-    # logger.info "Train: #{@train.name}, Cam-Num: #{@cam_num}, Img-Time:
-    # #{@time_readable}, Server-Time: #{Time.now.strftime(time_r_f)}, Stream-Time:
-    #  #{getStreamTime}"
-
-    img = request.body.read
-
-    for i in 1..8
-      saveImage img, i
-      Image.where(train_id: @train.id, time_stamp: @time).first_or_create
-      pushImages
-      deleteImages
-      logger.info "Train: #{@train.name}, Cam-Num: #{i}, Img-Time:
-       #{@time_readable}, Server-Time: #{Time.now.strftime(time_r_f)}, Stream-Time:
-        #{getStreamTime}"
-    end
+    saveImage request.body.read
+    Image.where(train_id: @train.id, time_stamp: @time).first_or_create
+    pushImages
+    deleteImages
     render text: "Upload OK\r\n"
+    log_images
+    #logger.info "--------------------------------------------------------------"
+    #logger.info "Time: #{@cam_time}, Milli: #{@cam_milli}"
   end
 
   def show
@@ -80,8 +76,8 @@ class ImagesController < ApplicationController
       param.is_i? ? param : 0
     end
 
-    def saveImage image_data, i
-      upload_dir = "public/uploads/image/#{@train.id}/#{i}"
+    def saveImage image_data
+      upload_dir = "public/uploads/image/#{@train.id}/#{@cam_num}"
       file_name = @time + ".jpg"
       path = File.join upload_dir, file_name
 
@@ -126,17 +122,27 @@ class ImagesController < ApplicationController
 
     def getTimeStamp disposition
       time = disposition.match(/^attachment; filename=\"(?<time>.*)\"/)[:time]
+      time, time_milli = time.split /,/
+      @time_arr = Time.now.strftime "%d.%m.%Y %H:%M:%S"
       time = Time.now.strftime "%Y%m%d%H%M%S" if time.blank?
+      @time_img = Time.strptime(time, "%Y%m%d%H%M%S").strftime "%d.%m.%Y %H:%M:%S"
+      @time_img = @time_img + " h:#{time_milli}"
       time = time.to_i
-      (time - (time % 2)).to_s
+      time_milli = time_milli.blank? ? 0 :  time_milli.to_i
+      path = "#{Rails.root}/public/uploads/image/#{@train.id}/#{@cam_num}"
+      file_path = File.join path, ((time - (time % 2)).to_s + ".jpg")
+      if File.file? file_path
+        @dub = "yes"
+        (time + (time % 2)).to_s
+      else
+        @dub = ""
+        (time - (time % 2)).to_s
+      end
     end
 
-    def getTimeStampSix disposition
-      time = disposition.match(/^attachment; filename=\"(?<time>.*)\"/)[:time]
-      time = Time.now.strftime "%Y%m%d%H%M%S" if time.blank?
-      sec = time[-2, 2]
-      rest = time[0..-3]
-      sec = (sec.to_i - sec.to_i % 6).to_s
-      rest + sec
+    def log_images
+      path = "#{Rails.root}/log/test.log"
+      log = "Train: #{@train.name}, Time Img: #{@time_img}, Time Img New: #{@time_readable}, Time Arrived: #{@time_arr}, Time Server: #{getStreamTime}, Cam Num: #{@cam_num}, Double: #{@dub}"
+      File.open(path, "a") { |f| f.puts log }
     end
 end

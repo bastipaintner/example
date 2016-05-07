@@ -1,11 +1,18 @@
+################################################################################
+# controller for traintypes                                                    #
+#                                                                              #
+# author: Sebastian Paintner                                                   #
+#                                                                              #
+# path: app/controllers/traintypes_controller.rb                               #
+################################################################################
 class TraintypesController < ApplicationController
-  before_filter :admin_user # nur für administrator
+  before_filter :admin_user # only accessible for admin
   def index
     @traintypes = Traintype.all
   end
 
   def show
-    @traintype = Traintype.find(params[:id])
+    @traintype = Traintype.find params[:id]
   end
 
   def new
@@ -13,11 +20,11 @@ class TraintypesController < ApplicationController
   end
 
   def edit
-    @traintype = Traintype.find(params[:id])
+    @traintype = Traintype.find params[:id]
   end
 
   def create
-    @traintype = Traintype.new(traintype_params)
+    @traintype = Traintype.new traintype_params
     if @traintype.save
       flash[:success] = "Zugtyp erfolgreich erstellt"
       redirect_to @traintype
@@ -27,8 +34,8 @@ class TraintypesController < ApplicationController
   end
 
   def update
-    @traintype = Traintype.find(params[:id])
-    if @traintype.update_attributes(traintype_params)
+    @traintype = Traintype.find params[:id]
+    if @traintype.update_attributes traintype_params
       flash[:success] = "Zugtyp erfolgreich bearbeitet"
       redirect_to @traintype
     else
@@ -44,6 +51,6 @@ class TraintypesController < ApplicationController
 
   private
     def traintype_params
-      params.require(:traintype).permit(:name)
+      params.require(:traintype).permit :name
     end
 end

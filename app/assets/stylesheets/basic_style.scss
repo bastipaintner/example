@@ -1,3 +1,11 @@
+/*******************************************************************************
+* basic application style                                                      *
+*                                                                              *
+* author: Sebastian Paintner                                                   *
+*                                                                              *
+* path: app/assets/stylesheets/basic.scss                                      *
+*******************************************************************************/
+/* fonts */
 @font-face {
   font-family: Raleway;
   src: asset_url('Raleway-Regular.ttf');
@@ -22,10 +30,12 @@
   font-weight: 400;
 }
 
+/* outline and box-sizing for all elements */
 * {
   outline: none;
   box-sizing: border-box;
 }
+
 html {
   height: 100%;
 }

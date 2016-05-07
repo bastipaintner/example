@@ -1,3 +1,11 @@
+<%##############################################################################
+# view for control_pages                                                       #
+# train page                                                                   #
+#                                                                              #
+# author: Sebastian Paintner                                                   #
+#                                                                              #
+# path: app/views/control_pages/index.html.erb                                 #
+##############################################################################%>
 <% @trains.each do |train| %>
   <%= render "control_pages/train", train: train %>
 <% end %>

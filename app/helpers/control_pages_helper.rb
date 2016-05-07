@@ -1,5 +1,12 @@
+################################################################################
+# helper for control pages                                                     #
+#                                                                              #
+# author: Sebastian Paintner                                                   #
+#                                                                              #
+# path: app/helpers/control_pages_helper.rb                                    #
+################################################################################
 module ControlPagesHelper
-  # ermittlet ob ein Zug online ist
+  # is a train online?
   def online? train_id
     $redis.exists train_id
   end

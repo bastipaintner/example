@@ -1,4 +1,11 @@
-# Trains
+################################################################################
+# seed for database                                                            #
+#                                                                              #
+# author: Sebastian Paintner                                                   #
+#                                                                              #
+# path: db/seeds.rb                                                            #
+################################################################################
+# trains
 for n in 301..308 do
   name = n
   traintype = 1
@@ -48,16 +55,18 @@ for n in 996..998 do
   Train.create!(name: name, traintype_id: traintype)
 end
 
+# traintypes
 Traintype.create!(name: "A")
 Traintype.create!(name: "B")
 Traintype.create!(name: "C")
 
+# users
 User.create!(name: "admin",
-            password: "SWM12345",
-            password_confirmation: "SWM12345",
+            password: "PW12345",
+            password_confirmation: "PW12345",
             admin: true)
 
 User.create!(name: "leitwarte",
-            password: "SWM12345",
-            password_confirmation: "SWM12345",
+            password: "PW12345",
+            password_confirmation: "PW12345",
             admin: false)

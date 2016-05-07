@@ -19,5 +19,5 @@ production:
   encoding: utf8
   database: subwaytube
   username: deployer
-  password: SWM12345
+  password: PW12345
   timeout: 5000

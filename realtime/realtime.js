@@ -1,4 +1,11 @@
-var io = require('socket.io').listen(5001)
+/*******************************************************************************
+* add realitme to rails                                                        *
+*                                                                              *
+* author: Sebastian Paintner                                                   *
+*                                                                              *
+* path: realtime/realime.js                                                    *
+*******************************************************************************/
+var io = require('socket.io').listen(5001);
 var redis = require('redis');
 var winston = require('winston');
 
@@ -73,7 +80,7 @@ function pushImages() {
 function getTimeStamp() {
   var year, month, day, hours, minutes, seconds, time;
   time = new Date();
-  time.setSeconds(time.getSeconds() - 20);
+  time.setSeconds(time.getSeconds() - 60);
   year = time.getFullYear();
   month = getFullDatePart(time.getMonth() + 1);
   day = getFullDatePart(time.getDate());

@@ -1,3 +1,10 @@
+<%##############################################################################
+# application layout for all pages                                             #
+#                                                                              #
+# author: Sebastian Paintner                                                   #
+#                                                                              #
+# path: app/views/layouts/application.html.erb                                 #
+##############################################################################%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,12 +17,9 @@
 </head>
 <body>
   <%= render 'layouts/header' if request.fullpath != login_path %>
-  <% if !flash.blank? %>
-  <%= render partial: 'shared/modal', locals: {body: "shared/flash",
-    modal_title: "Fehler"} %>
-  <% end %>
   <% if request.fullpath != login_path %>
   <section class="content">
+    <%= render 'shared/flash' %>
     <%= yield %>
   </section>
   <% else %>

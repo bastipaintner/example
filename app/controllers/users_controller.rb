@@ -1,11 +1,18 @@
+################################################################################
+# controller for trains                                                        #
+#                                                                              #
+# author: Sebastian Paintner                                                   #
+#                                                                              #
+# path: app/controllers/trains_controller.rb                                   #
+################################################################################
 class UsersController < ApplicationController
-  before_filter :admin_user # nur für administrator
+  before_filter :admin_user # only accessible for admin
   def index
     @users = User.all
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find params[:id]
   end
 
   def new
@@ -13,11 +20,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = User.find params[:id]
   end
 
   def create
-    @user = User.new(user_params)
+    @user = User.new user_params
     if @user.save
       redirect_to @user
       flash[:success] = "Nutzer erfolgreich erstellt"
@@ -27,8 +34,8 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
-    if @user.update_attributes(user_params)
+    @user = User.find params[:id]
+    if @user.update_attributes user_params
       flash[:success] = "Nutzer erfolgreich bearbeitet"
       redirect_to @user
     else
@@ -44,7 +51,7 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:name, :admin, :password,
-        :password_confirmation)
+      params.require(:user).permit :name, :admin, :password,
+        :password_confirmation
     end
 end

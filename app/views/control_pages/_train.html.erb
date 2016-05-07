@@ -1,15 +1,23 @@
+<%##############################################################################
+# view for control_pages                                                       #
+# train element for train page                                                 #
+#                                                                              #
+# author: Sebastian Paintner                                                   #
+#                                                                              #
+# path: app/views/control_pages/_train.html.erb                                #
+##############################################################################%>
 <% i = @num %>
-<% if (i - 1) % @numOfRows == 0 %><div class="boxes_row"><% end %>
+<% if (i - 1) % @numOfColumns == 0 %><div class="boxes_row"><% end %>
   <div id="train_<%= train.id %>" class="box">
     <%= link_to "<span class='full_text_height'>#{train.name}</span>".html_safe,
       "/zug/#{train.name}", class: getClass(train.id) %>
   </div>
 <% if i == @numOfTrains %>
-  <% @numOfEmptyRows.times do %>
+  <% @numOfEmptyBoxes.times do %>
     <div class="box">
       <a class="train_offline" href="#"></a>
     </div>
   <% end %>
 <% end %>
-<% if i % @numOfRows == 0 %></div><% end %>
+<% if i % @numOfColumns == 0 %></div><% end %>
 <% @num += 1 %>
