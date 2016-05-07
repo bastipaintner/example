@@ -15,9 +15,6 @@ class Train < ActiveRecord::Base
 
   private
     def get_ip_address
-      self.ip_address = "10.33.45" if name == "301"
-      self.ip_address = "10.33.47" if name == "303"
-      self.ip_address = "10.35.229" if name == "997"
-      self.ip_address = "10.33.56" if name == "312"
+      
     end
 end
